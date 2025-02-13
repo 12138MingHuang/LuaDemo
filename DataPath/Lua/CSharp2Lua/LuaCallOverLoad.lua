@@ -1,3 +1,5 @@
+-- Lua调用重载方法
+
 -- 数字重载函数(如果C#中 有Test(int num)和Test(float num) 看哪个函数申明在前了)
 CS.TestOverLoad.Test(99);
 
