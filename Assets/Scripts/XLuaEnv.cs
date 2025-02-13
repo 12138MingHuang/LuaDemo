@@ -38,7 +38,7 @@ public class XLuaEnv
     /// <summary>
     /// 执行Lua脚本
     /// </summary>
-    /// <param name="fileName"> Lua脚本文件名（后缀可带课不带）</param>
+    /// <param name="fileName"> Lua脚本文件名包括路径（后缀可带课不带）</param>
     /// <returns></returns>
     public object[] DoString(string fileName)
     {
