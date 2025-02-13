@@ -5,7 +5,7 @@ print(CS.ZB.TestStatic.id);
 
 -- 给静态属性赋值
 CS.ZB.TestStatic.Name = "admin";
-print(CS.ZB.TestStatic.Name)
+print(CS.ZB.TestStatic.Name);
 
 -- 静态成员方法调用
 -- 规则 CS.命名空间.类名.方法名
