@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TestGenericType
 {
-    public void Output<T>(T data)
+    private void Output<T>(T data)
     {
         Debug.Log("泛型方法：" + data.ToString());
     }
@@ -15,6 +15,12 @@ public class TestGenericType
     public void Output(string data)
     {
         Output<string>(data);
+    }
+    
+    public void Output(double data)
+    {
+
+        Output<double>(data);
     }
 }
 
