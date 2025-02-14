@@ -16,12 +16,7 @@ public class TestGenericType
     {
         Output<string>(data);
     }
-    
-    public void Output(double data)
-    {
 
-        Output<double>(data);
-    }
 }
 
 public class LuaCallGenericType : MonoBehaviour
