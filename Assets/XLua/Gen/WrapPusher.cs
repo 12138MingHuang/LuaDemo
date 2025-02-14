@@ -41,6 +41,7 @@ namespace XLua
 				translator.RegisterPushAndGetAndUpdate<XLuaTest.MyEnum>(translator.PushXLuaTestMyEnum, translator.Get, translator.UpdateXLuaTestMyEnum);
 				translator.RegisterPushAndGetAndUpdate<Tutorial.DerivedClass.TestEnumInner>(translator.PushTutorialDerivedClassTestEnumInner, translator.Get, translator.UpdateTutorialDerivedClassTestEnumInner);
 			
+				translator.RegisterCaster<LuaCore>(translator.Get);
 			}
         }
         
@@ -1026,6 +1027,67 @@ namespace XLua
         
 		// table cast optimze
 		
+		public void Get(RealStatePtr L, int index, out LuaCore val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    val = (LuaCore)FastGetCSObj(L, index);
+            }
+			else if (type == LuaTypes.LUA_TTABLE)
+			{
+			    val = new LuaCore();
+				int top = LuaAPI.lua_gettop(L);
+				
+				if (Utils.LoadField(L, index, "id"))
+				{
+					Get(L, top + 1, out val.id);
+				}
+				LuaAPI.lua_pop(L, 1);
+				
+				if (Utils.LoadField(L, index, "name"))
+				{
+					Get(L, top + 1, out val.name);
+				}
+				LuaAPI.lua_pop(L, 1);
+				
+				if (Utils.LoadField(L, index, "isWoman"))
+				{
+					Get(L, top + 1, out val.isWoman);
+				}
+				LuaAPI.lua_pop(L, 1);
+				
+				if (Utils.LoadField(L, index, "Func1"))
+				{
+					Get(L, top + 1, out val.Func1);
+				}
+				LuaAPI.lua_pop(L, 1);
+				
+				if (Utils.LoadField(L, index, "Func2"))
+				{
+					Get(L, top + 1, out val.Func2);
+				}
+				LuaAPI.lua_pop(L, 1);
+				
+				if (Utils.LoadField(L, index, "Func3"))
+				{
+					Get(L, top + 1, out val.Func3);
+				}
+				LuaAPI.lua_pop(L, 1);
+				
+				if (Utils.LoadField(L, index, "Func4"))
+				{
+					Get(L, top + 1, out val.Func4);
+				}
+				LuaAPI.lua_pop(L, 1);
+				
+			}
+            else
+            {
+                throw new Exception("can not cast " + LuaAPI.lua_type(L, index) + " to " + typeof(LuaCore));
+            }
+        }
+		
         
     }
 	
@@ -1205,6 +1267,12 @@ namespace XLua
 			else if (type == typeof(Tutorial.DerivedClass.TestEnumInner[]))
 			{
 			    Tutorial.DerivedClass.TestEnumInner[] array = obj as Tutorial.DerivedClass.TestEnumInner[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(LuaCore[]))
+			{
+			    LuaCore[] array = obj as LuaCore[];
 				translator.Get(L, obj_idx, out array[array_idx]);
 				return true;
 			}
