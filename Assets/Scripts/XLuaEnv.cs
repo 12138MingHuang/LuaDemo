@@ -7,6 +7,11 @@ using XLua;
 public class XLuaEnv
 {
     private LuaEnv _luaEnv;
+
+    public LuaTable Global
+    {
+        get { return _luaEnv.Global; }
+    }
     
     private XLuaEnv()
     {
@@ -48,6 +53,14 @@ public class XLuaEnv
         }
 
         return _luaEnv.DoString($"require('{fileName}')");
+    }
+    
+    /// <summary>
+    /// 更新Lua环境。
+    /// </summary>
+    public void Tick()
+    {
+        _luaEnv.Tick();
     }
     
     /// <summary>
