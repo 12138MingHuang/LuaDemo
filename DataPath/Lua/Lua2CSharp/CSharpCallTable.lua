@@ -1,4 +1,4 @@
-Core = {};
+Core = {45,56};
 Core.id = 100;
 Core.name = "ROOT";
 Core.isWoman = false;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using XLua;
 
@@ -43,7 +44,8 @@ public class CSharpCallTable : MonoBehaviour
         
         // MapLuaTable();
         // MapStruct();
-        MapInterface();
+        // MapInterface();
+        MapDictAndList();
     }
 
     // 映射Lua表
@@ -95,6 +97,24 @@ public class CSharpCallTable : MonoBehaviour
         Debug.Log(iCore.Func2());
         iCore.Func3();
         iCore.Func4();
+    }
+    
+    private void MapDictAndList()
+    {
+        LuaTable global = XLuaEnv.Instance.Global;
+        Dictionary<string, object> dict = new Dictionary<string, object>();
+        dict = global.Get<Dictionary<string, object>>("Core");
+        foreach (var item in dict)
+        {
+            Debug.Log($"{item.Key}: {item.Value}");
+        }
+        
+        List<int> list = new List<int>();
+        list = global.Get<List<int>>("Core");
+        foreach (var item in list)
+        {
+            Debug.Log($"{item}: {item}");
+        }
     }
     
     private void Update()
