@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 383171417}
   - component: {fileID: 383171418}
   - component: {fileID: 383171419}
+  - component: {fileID: 383171420}
   m_Layer: 0
   m_Name: CSharpCallLua
   m_TagString: Untagged
@@ -174,9 +175,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383171416}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 469e5f6b06c7416eb19313481a881186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &383171420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383171416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e19952ccc84650855717d8f2f02581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &705507993
