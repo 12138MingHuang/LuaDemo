@@ -42,6 +42,7 @@ namespace XLua
 				translator.RegisterPushAndGetAndUpdate<Tutorial.DerivedClass.TestEnumInner>(translator.PushTutorialDerivedClassTestEnumInner, translator.Get, translator.UpdateTutorialDerivedClassTestEnumInner);
 			
 				translator.RegisterCaster<LuaCore>(translator.Get);
+				translator.RegisterCaster<LuaBootstrap>(translator.Get);
 			}
         }
         
@@ -1088,6 +1089,49 @@ namespace XLua
             }
         }
 		
+		public void Get(RealStatePtr L, int index, out LuaBootstrap val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    val = (LuaBootstrap)FastGetCSObj(L, index);
+            }
+			else if (type == LuaTypes.LUA_TTABLE)
+			{
+			    val = new LuaBootstrap();
+				int top = LuaAPI.lua_gettop(L);
+				
+				if (Utils.LoadField(L, index, "Awake"))
+				{
+					Get(L, top + 1, out val.Awake);
+				}
+				LuaAPI.lua_pop(L, 1);
+				
+				if (Utils.LoadField(L, index, "Start"))
+				{
+					Get(L, top + 1, out val.Start);
+				}
+				LuaAPI.lua_pop(L, 1);
+				
+				if (Utils.LoadField(L, index, "Update"))
+				{
+					Get(L, top + 1, out val.Update);
+				}
+				LuaAPI.lua_pop(L, 1);
+				
+				if (Utils.LoadField(L, index, "OnDestroy"))
+				{
+					Get(L, top + 1, out val.OnDestroy);
+				}
+				LuaAPI.lua_pop(L, 1);
+				
+			}
+            else
+            {
+                throw new Exception("can not cast " + LuaAPI.lua_type(L, index) + " to " + typeof(LuaBootstrap));
+            }
+        }
+		
         
     }
 	
@@ -1273,6 +1317,12 @@ namespace XLua
 			else if (type == typeof(LuaCore[]))
 			{
 			    LuaCore[] array = obj as LuaCore[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(LuaBootstrap[]))
+			{
+			    LuaBootstrap[] array = obj as LuaBootstrap[];
 				translator.Get(L, obj_idx, out array[array_idx]);
 				return true;
 			}

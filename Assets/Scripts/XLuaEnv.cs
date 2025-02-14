@@ -70,6 +70,5 @@ public class XLuaEnv
     {
         _luaEnv.Dispose();
         _instance = null;
-        Debug.Log("XLuaEnv 已释放");
     }
 }

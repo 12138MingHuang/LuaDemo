@@ -767,6 +767,11 @@ namespace XLua
 			    return new TransMy(__Gen_Delegate_Imp1);
 			}
 		
+		    if (type == typeof(LifeCycle))
+			{
+			    return new LifeCycle(__Gen_Delegate_Imp2);
+			}
+		
 		    if (type == typeof(System.Action))
 			{
 			    return new System.Action(__Gen_Delegate_Imp2);
