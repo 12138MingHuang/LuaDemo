@@ -22,14 +22,28 @@ public struct LuaCore
     public TransMy Func4;
 }
 
+[CSharpCallLua]
+public interface ILuaCore
+{
+    public int id { get; set; }
+    public string name { get; set; }
+    public bool isWoman { get; set; }
+    
+    void Func1(string name);
+    string Func2();
+    void Func3();
+    void Func4();
+}
+
 public class CSharpCallTable : MonoBehaviour
 {
     private void Start()
     {
         XLuaEnv.Instance.DoString("Lua2CSharp/CSharpCallTable");
         
-        MapLuaTable();
-        MapStruct();
+        // MapLuaTable();
+        // MapStruct();
+        MapInterface();
     }
 
     // 映射Lua表
@@ -58,6 +72,29 @@ public class CSharpCallTable : MonoBehaviour
         LuaCore core = global.Get<LuaCore>("Core");
         Debug.Log(core.id);
         core.Func4(core);
+    }
+    
+    // 映射接口
+    private void MapInterface()
+    {
+        LuaTable global = XLuaEnv.Instance.Global;
+        ILuaCore iCore = global.Get<ILuaCore>("Core");
+        // 修改table中某键的值
+        global.SetInPath<int>("Core.id", 1010);
+        
+        string name = iCore.name;
+        int id = iCore.id;
+        bool isWoman = iCore.isWoman;
+        Debug.Log($"name: {name}, id: {id}, isWoman: {isWoman}");
+        
+        // 引用类型映射
+        iCore.name = "Lucy";
+        Debug.Log(global.Get<string>("Core.name"));
+        
+        // iCore.Func1("Hello");
+        Debug.Log(iCore.Func2());
+        iCore.Func3();
+        iCore.Func4();
     }
     
     private void Update()
